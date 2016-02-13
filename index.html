@@ -1,8 +1,280 @@
 <html>
 <head>
-<title>FARTING DICE</title>
+<title>FDICE</title>
+<style>
+	body{
+		background: #333 ;
+	}
+
+	#dice{
+		position: absolute ;
+		z-index: 400 ;
+
+		width: 480px ;
+		height: 800px ;
+
+		background: url('bg.gif') ;
+	}
+
+	#roll{
+		display: block ;
+		position: absolute ;
+		left: 400px ;
+
+		font-size: 28px ;
+		font-family: tahoma, arial, helvetica, verdana, sans-serif ;
+
+		width: 200px ;
+		height: 80px ;
+
+		text-align: center ;
+
+		background: red ;
+
+		border: 4px solid #330000 ;
+		color: white ;
+		font-weight: bold ;
+	}
+
+	#fart{
+		display: block ;
+		position: absolute ;
+		left: 400px ;
+		top: 200px ;
+
+		font-size: 28px ;
+		font-family: tahoma, arial, helvetica, verdana, sans-serif ;
+
+		width: 200px ;
+		height: 80px ;
+
+		text-align: center ;
+
+		background: green ;
+
+		border: 4px solid #003300 ;
+		color: white ;
+		font-weight: bold ;
+	}
+
+	#dbg{
+		display: block ;
+		position: absolute ;
+		left: 400px ;
+		top: 400px ;
+
+		font-size: 16px ;
+		font-family: tahoma, arial, helvetica, verdana, sans-serif ;
+
+		width: 200px ;
+		height: 80px ;
+
+		text-align: center ;
+
+		background: black ;
+
+		border: 4px solid #000 ;
+		color: white ;
+		font-weight: bold ;
+	}
+
+	#dice-frames{
+		position: absolute ;
+		z-index: 0 ;
+		width: 1px ;
+		height: 1px ;
+		overflow: hidden ;
+	}
+
+</style>
+<script>
+	var dt1 = 'a' ;
+	var dt2 = 'b' ;
+
+	var df1 = 1 ;
+	var df2 = 1 ;
+
+	var r1 = 0 ;
+	var r2 = 0 ;
+
+	var _IUD = {} ; // update interval
+	var _AFS = {} ; // farting sprite
+
+	var _CTX = {} ; // dice context
+
+	var _DT = [ 'a', 'b', 'c', 'd' ] ;
+
+	function main(){
+		initDiceFrames() ;
+
+		_CTX = getID('dice').getContext('2d') ;
+
+		_IUD = window.setInterval( update, 100 ) ;
+		_AFS = document.getElementById( 'afs' ) ;
+
+		getID('dice').addEventListener( 'click', roll, false ) ;
+	}
+
+	function initDiceFrames(){
+		var img ;
+
+		// A class
+		for( var i = 1; i < 22; i++ ){
+			img = document.createElement('img') ;
+
+			img.src = 'a-' + i + '.png' ;
+			img.id = 'a-' + i ;
+
+			getID('dice-frames').appendChild( img ) ;
+		}
+
+		// B class
+		for( var i = 1; i < 18; i++ ){
+			img = document.createElement('img') ;
+
+			img.src = 'b-' + i + '.png' ;
+			img.id = 'b-' + i ;
+
+			getID('dice-frames').appendChild( img ) ;
+		}
+
+		// C class
+		for( var i = 1; i < 13; i++ ){
+			img = document.createElement('img') ;
+
+			img.src = 'c-' + i + '.png' ;
+			img.id = 'c-' + i ;
+
+			getID('dice-frames').appendChild( img ) ;
+		}
+
+		// D class
+		for( var i = 1; i < 17; i++ ){
+			img = document.createElement('img') ;
+
+			img.src = 'd-' + i + '.png' ;
+			img.id = 'd-' + i ;
+
+			getID('dice-frames').appendChild( img ) ;
+		}
+	}
+
+	function roll(){
+		dt1 = _DT[ randomInt( 0, 3 ) ] ;
+		dt2 = dt1 ;
+
+		while( dt2 == dt1 ){
+			dt2 = _DT[ randomInt( 0, 3 ) ] ;
+		}
+
+		r1 = randomInt( 1, 6 ) ;
+		r2 = randomInt( 1, 6 ) ;
+
+
+		df1 = 0 ;
+		df2 = 0 ;
+
+		rsnd() ;
+
+		window.setTimeout( fart, 2000 ) ;
+	}
+
+	function update(){
+		df1++ ;
+		df2++ ;
+
+		// console.log('df1 = ' + df1 ) ;
+		// console.log('df2 = ' + df2 ) ;
+
+		// LIMIT CONDITION FOR DICE 1
+		if( ( df1 > 21 ) && ( dt1 == 'a' ) ) df1 = 21 ;
+		if( ( df1 > 17 ) && ( dt1 == 'b' ) ) df1 = 17 ;
+		if( ( df1 > 12 ) && ( dt1 == 'c' ) ) df1 = 12 ;
+		if( ( df1 > 16 ) && ( dt1 == 'd' ) ) df1 = 16 ;
+
+		// LIMIT CONDITION FOR DICE 2
+		if( ( df2 > 21 ) && ( dt2 == 'a' ) ) df2 = 21 ;
+		if( ( df2 > 17 ) && ( dt2 == 'b' ) ) df2 = 17 ;
+		if( ( df2 > 12 ) && ( dt2 == 'c' ) ) df2 = 12 ;
+		if( ( df2 > 16 ) && ( dt2 == 'd' ) ) df2 = 16 ;
+
+		_CTX.clearRect( 0, 0, 480, 800 ) ;
+
+		_CTX.drawImage( getID( dt1 + '-' + df1 ), 0, 0, 480, 800 ) ;
+		_CTX.drawImage( getID( dt2 + '-' + df2 ), 0, 0, 480, 800 ) ;
+	}
+
+	function fart(){
+		fart1() ;
+		window.setTimeout( fart2, 200 ) ;
+	}
+
+	function fart1(){
+		var t1 = ( r1 - 1 ) * 2 ;
+
+		df1 = df1 - 4 ;
+
+		getID('afs1').currentTime = t1 ;
+		getID('afs1').play() ;
+
+		window.setTimeout( function(){ getID('afs1').pause() }, 2000 ) ;
+	}
+
+	function fart2(){
+		var t2 = ( r2 - 1 ) * 2 ;
+
+		df2 = df2 - 5 ;
+
+		getID('afs2').currentTime = t2 ;
+		getID('afs2').play() ;
+
+		window.setTimeout( function(){ getID('afs2').pause() }, 2000 ) ;
+	}
+
+	function rsnd(){
+		var t = randomInt( 0, 5 ) * 2 ;
+
+		getID('aro').currentTime = t ;
+		getID('aro').play() ;
+
+		window.setTimeout( function(){ getID('aro').pause() }, 2000 ) ;
+	}
+
+	function getID( id ){
+		return document.getElementById(id) ;
+	}
+
+	function randomInt( min, max ){
+		return Math.floor( Math.random() * (max - min + 1)) + min ;
+	}
+
+	function dbg( msg ){
+		getID('dbg').innerHTML = msg ;
+	}
+</script>
 </head>
-<body>
-<h3>FARTING DICE</h3>
+
+<body id="thebody" onload="main()">
+	<canvas id="dice" width="480" height="800"></canvas>
+<!-- 
+	<div id="dbg"></div>
+
+	<a id="roll" href="javascript:roll()">ROL</a>
+	<a id="fart" href="javascript:fart()">FRT</a>
+ -->
+	<audio id="aro">
+		<source src="aro.wav" type="audio/wav">
+	</audio>
+
+	<audio id="afs1">
+		<source src="afs.wav" type="audio/wav">
+	</audio>
+
+	<audio id="afs2">
+		<source src="afs.wav" type="audio/wav">
+	</audio>
+
+	<div id="dice-frames"></div>
 </body>
+
 </html>
