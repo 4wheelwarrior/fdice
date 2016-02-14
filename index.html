@@ -104,8 +104,13 @@
 
 	var _DT = [ 'a', 'b', 'c', 'd' ] ;
 
+	var _ARO = {}
+
 	function main(){
 		initDiceFrames() ;
+
+		_ARO = new Media( 'aro.wav' ) ;
+
 
 		_CTX = getID('dice').getContext('2d') ;
 
@@ -234,8 +239,10 @@
 	function rsnd(){
 		var t = randomInt( 0, 5 ) * 2 ;
 
-		getID('aro').currentTime = t ;
-		getID('aro').play() ;
+		_ARO.play() ;
+
+		// getID('aro').currentTime = t ;
+		// getID('aro').play() ;
 
 		window.setTimeout( function(){ getID('aro').pause() }, 2000 ) ;
 	}
