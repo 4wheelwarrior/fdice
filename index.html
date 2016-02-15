@@ -6,6 +6,16 @@
 		background: #333 ;
 	}
 
+	#ver{
+		position: absolute ;
+		z-index: 1000 ;
+		background: black ;
+		width: 80px ;
+		height: 30px ;
+		padding: 4px ;
+		color: white ;
+	}
+
 	#dice{
 		position: absolute ;
 		z-index: 400 ;
@@ -262,6 +272,7 @@
 </head>
 
 <body id="thebody" onload="main()">
+	<div id="ver">1</div>
 	<canvas id="dice" width="480" height="800"></canvas>
 <!-- 
 	<div id="dbg"></div>
