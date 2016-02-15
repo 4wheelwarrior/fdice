@@ -60,11 +60,22 @@
     -->
 
     <!-- Define app icon for each platform. -->
-    <icon src="icon.png" />
-    <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:qualifier="ldpi" />
-    <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:qualifier="mdpi" />
-    <icon src="res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:qualifier="hdpi" />
-    <icon src="res/icon/android/icon-96-xhdpi.png"  gap:platform="android"    gap:qualifier="xhdpi" />
+    <!--
+
+        48 × 48 (mdpi)
+        72 × 72 (hdpi)
+        96 × 96 (xhdpi)
+        144 × 144 (xxhdpi)
+        192 × 192 (xxxhdpi)
+        512 × 512 (Google Play store)
+    -->
+    <icon src="icon-96.png" />
+    <icon src="icon-48.png"   gap:platform="android"    gap:qualifier="ldpi" />
+    <icon src="icon-48.png"   gap:platform="android"    gap:qualifier="mdpi" />
+    <icon src="icon-72.png"   gap:platform="android"    gap:qualifier="hdpi" />
+    <icon src="icon-96.png"   gap:platform="android"    gap:qualifier="xhdpi" />
+    <icon src="icon-144.png"  gap:platform="android"    gap:qualifier="xxhdpi" />
+    <icon src="icon-192.png"  gap:platform="android"    gap:qualifier="xxxhdpi" />
 
     <!-- Define app splash screen for each platform. -->
     <gap:splash src="res/screen/android/screen-ldpi-portrait.png"       gap:platform="android" gap:qualifier="port-ldpi" />
