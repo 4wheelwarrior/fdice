@@ -115,12 +115,14 @@
 
 	var _DT = [ 'a', 'b', 'c', 'd' ] ;
 
-	var _ARO = {}
+	var _ARO = {}	// rolling sounds
+	var _AFR = {}   // farting sounds
 
 	function main(){
 		initDiceFrames() ;
 
-		_ARO = new Media( '/android_asset/www/aro.wav' ) ;
+		initRollAudio() ;
+		initFartAudio() ;
 
 
 		_CTX = getID('dice').getContext('2d') ;
@@ -129,6 +131,18 @@
 		_AFS = document.getElementById( 'afs' ) ;
 
 		getID('dice').addEventListener( 'click', roll, false ) ;
+	}
+
+	function initRollAudio(){
+		for( var i = 1; i < 7; i++ ){
+			_ARO[i] = new Media( '/android_asset/www/rol-' + i + '.wav' ) ;
+		}
+	}
+
+	function initFartAudio(){
+		for( var i = 1; i < 7; i++ ){
+			_AFR[i] = new Media( '/android_asset/www/frt-' + i + '.wav' ) ;
+		}
 	}
 
 	function initDiceFrames(){
@@ -226,36 +240,17 @@
 	}
 
 	function fart1(){
-		var t1 = ( r1 - 1 ) * 2 ;
-
-		df1 = df1 - 4 ;
-
-		getID('afs1').currentTime = t1 ;
-		getID('afs1').play() ;
-
-		window.setTimeout( function(){ getID('afs1').pause() }, 2000 ) ;
+		_AFR[ r1 ].play() ;
 	}
 
 	function fart2(){
-		var t2 = ( r2 - 1 ) * 2 ;
-
-		df2 = df2 - 5 ;
-
-		getID('afs2').currentTime = t2 ;
-		getID('afs2').play() ;
-
-		window.setTimeout( function(){ getID('afs2').pause() }, 2000 ) ;
+		_AFR[ r2 ].play() ;
 	}
 
 	function rsnd(){
-		var t = randomInt( 0, 5 ) * 2 ;
+		var i = randomInt( 1, 6 ) ;
 
-		_ARO.play() ;
-
-		// getID('aro').currentTime = t ;
-		// getID('aro').play() ;
-
-		window.setTimeout( function(){ getID('aro').pause() }, 2000 ) ;
+		_ARO[i].play() ;
 	}
 
 	function getID( id ){
