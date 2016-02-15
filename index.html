@@ -6,6 +6,8 @@
 <style>
 	body{
 		background: #333 ;
+		padding: 0 ;
+		margin: 0 ;
 	}
 
 	#ver{
@@ -26,26 +28,6 @@
 		height: 800px ;
 
 		background: url('bg.gif') ;
-	}
-
-	#roll{
-		display: block ;
-		position: absolute ;
-		left: 400px ;
-
-		font-size: 28px ;
-		font-family: tahoma, arial, helvetica, verdana, sans-serif ;
-
-		width: 200px ;
-		height: 80px ;
-
-		text-align: center ;
-
-		background: red ;
-
-		border: 4px solid #330000 ;
-		color: white ;
-		font-weight: bold ;
 	}
 
 	#fart{
@@ -242,10 +224,13 @@
 	}
 
 	function fart1(){
+		df1 = df1 - 4 ;
+
 		_AFR[ r1 ].play() ;
 	}
 
 	function fart2(){
+		df2 = df2 - 4 ;
 		_AFR[ r2 ].play() ;
 	}
 
@@ -270,7 +255,7 @@
 </head>
 
 <body id="thebody" onload="main()">
-	<div id="ver">2</div>
+	<div id="ver">4</div>
 	<canvas id="dice" width="480" height="800"></canvas>
 <!-- 
 	<div id="dbg"></div>
