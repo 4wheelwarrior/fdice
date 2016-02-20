@@ -51,7 +51,7 @@
 		width: 480px ;
 		height: 800px ;
 
-		background: url('bg.gif') ;
+		background: url('bg2.gif') ;
 	}
 
 	#fart{
@@ -121,10 +121,12 @@
 
 	var _CTX = {} ; // dice context
 
-	var _DT = [ 'a', 'b', 'c', 'd' ] ;
+	var _DT = [ 'a', 'b', 'c', 'd', 'e', 'f' ] ;
 
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
+
+	var _dsa = true ; // DiSAble audio bit
 
 	function main(){
 		initDiceFrames() ;
@@ -142,12 +144,16 @@
 	}
 
 	function initRollAudio(){
+		if( _dsa == true ) return ;
+
 		for( var i = 1; i < 7; i++ ){
 			_ARO[i] = new Media( '/android_asset/www/rol-' + i + '.wav' ) ;
 		}
 	}
 
 	function initFartAudio(){
+		if( _dsa == true ) return ;
+
 		for( var i = 1; i < 7; i++ ){
 			_AFR[i] = new Media( '/android_asset/www/frt-' + i + '.wav' ) ;
 		}
@@ -195,15 +201,41 @@
 
 			getID('dice-frames').appendChild( img ) ;
 		}
+
+		// E class
+		for( var i = 1; i < 18; i++ ){
+			img = document.createElement('img') ;
+
+			img.src = 'e-' + i + '.png' ;
+			img.id = 'e-' + i ;
+
+			getID('dice-frames').appendChild( img ) ;
+		}
+
+		// F class
+		for( var i = 1; i < 13; i++ ){
+			img = document.createElement('img') ;
+
+			img.src = 'f-' + i + '.png' ;
+			img.id = 'f-' + i ;
+
+			getID('dice-frames').appendChild( img ) ;
+		}
 	}
 
 	function roll(){
-		dt1 = _DT[ randomInt( 0, 3 ) ] ;
-		dt2 = dt1 ;
+		// dt1 = _DT[ randomInt( 0, 3 ) ] ;
+		// dt2 = dt1 ;
 
-		while( dt2 == dt1 ){
-			dt2 = _DT[ randomInt( 0, 3 ) ] ;
-		}
+		// while( dt2 == dt1 ){
+		// 	dt2 = _DT[ randomInt( 0, 3 ) ] ;
+		// }
+
+
+		// Lock to E type for testing
+		dt1 = 'e' ;
+		dt2 = 'f' ;
+
 
 		r1 = randomInt( 1, 6 ) ;
 		r2 = randomInt( 1, 6 ) ;
@@ -231,12 +263,16 @@
 		if( ( df1 > 17 ) && ( dt1 == 'b' ) ) df1 = 17 ;
 		if( ( df1 > 12 ) && ( dt1 == 'c' ) ) df1 = 12 ;
 		if( ( df1 > 16 ) && ( dt1 == 'd' ) ) df1 = 16 ;
+		if( ( df1 > 17 ) && ( dt1 == 'e' ) ) df1 = 17 ;
+		if( ( df1 > 12 ) && ( dt1 == 'f' ) ) df1 = 12 ;
 
 		// LIMIT CONDITION FOR DICE 2
 		if( ( df2 > 21 ) && ( dt2 == 'a' ) ) df2 = 21 ;
 		if( ( df2 > 17 ) && ( dt2 == 'b' ) ) df2 = 17 ;
 		if( ( df2 > 12 ) && ( dt2 == 'c' ) ) df2 = 12 ;
 		if( ( df2 > 16 ) && ( dt2 == 'd' ) ) df2 = 16 ;
+		if( ( df2 > 17 ) && ( dt2 == 'e' ) ) df2 = 17 ;
+		if( ( df2 > 12 ) && ( dt2 == 'f' ) ) df2 = 12 ;
 
 		_CTX.clearRect( 0, 0, 480, 800 ) ;
 
@@ -252,17 +288,21 @@
 	function fart1(){
 		df1 = df1 - 5 ;
 
+		if( _dsa == true ) return ;
 		_AFR[ r1 ].play() ;
 	}
 
 	function fart2(){
 		df2 = df2 - 5 ;
+
+		if( _dsa == true ) return ;
 		_AFR[ r2 ].play() ;
 	}
 
 	function rsnd(){
 		var i = randomInt( 1, 6 ) ;
 
+		if( _dsa == true ) return ;
 		_ARO[i].play() ;
 	}
 
