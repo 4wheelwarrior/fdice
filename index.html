@@ -139,10 +139,11 @@
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
 
-	var _dsa = false ; // DiSAble audio bit
+	var _dsa = true ; // DiSAble audio bit
 
 	function main(){
 		initDiceFrames() ;
+		initValuFrames() ;
 
 		initRollAudio() ;
 		initFartAudio() ;
@@ -183,6 +184,25 @@
 
 				img.src = 'd-' + i + '-' + j + '.png' ;
 				img.id =  'd-' + i + '-' + j ;
+
+				// console.log('generated img id: ' + img.id) ;
+
+				getID('dice-frames').appendChild( img ) ;
+			}
+		}
+	}
+
+	function initValuFrames(){
+		var img ;
+
+		// OUTER LOOP: ROLL ANIM TYPE (0 - N)
+		for( var i = 0; i < _DT.length; i++ ){
+			// INNER LOOP: DICE VALUE
+			for( var j = 1; j < 7; j++ ){
+				img = document.createElement('img') ;
+
+				img.src = 'v-' + i + '-' + j + '.png' ;
+				img.id =  'v-' + i + '-' + j ;
 
 				// console.log('generated img id: ' + img.id) ;
 
@@ -238,13 +258,13 @@
 		// console.log('df2 = ' + df2 ) ;
 
 
-		// LIMIT CONDITION FOR DICE 1
+		// DICE 1: IF END FRAME REACHED, CAP & SET FLAG
 		if( ( df1 > _DT[ dt1 ] ) ){
 			df1 = _DT[ dt1 ] ;
 			rc1 = true ;
 		}
 
-		// LIMIT CONDITION FOR DICE 2
+		// DICE 2: IF END FRAME REACHED, CAP & SET FLAG
 		if( ( df2 > _DT[ dt2 ] ) ){
 			df2 = _DT[ dt2 ] ;
 			rc2 = true
@@ -252,12 +272,22 @@
 
 		_CTX.clearRect( 0, 0, 480, 800 ) ;
 
-		_CTX.drawImage( getID( 'd-' + dt1 + '-' + df1 ), x1, 0, 480, 800 ) ;
-		_CTX.drawImage( getID( 'd-' + dt2 + '-' + df2 ), x2, 0, 480, 800 ) ;
 
-		// if( rc1 == true && rc2 == true ){
-		// 	fart() ;
-		// }
+		// DRAW DICE 1 ( ANIM OR VALUE FRAME, IF FINISHED )
+		if( rc1 == false ) _CTX.drawImage( getID( 'd-' + dt1 + '-' + df1 ), x1, 0, 480, 800 ) ;
+		else _CTX.drawImage( getID( 'v-' + dt1 + '-' + r1 ), x1, 0, 480, 800 ) ;
+
+		// DRAW DICE 2 ( ANIM OR VALUE FRAME, IF FINISHED )
+		if( rc2 == false ) _CTX.drawImage( getID( 'd-' + dt2 + '-' + df2 ), x2, 0, 480, 800 ) ;
+		else _CTX.drawImage( getID( 'v-' + dt2 + '-' + r2 ), x2, 0, 480, 800 ) ;
+	}
+
+	function drawDiceFrame(){
+
+	}
+
+	function drawValuFrame(){
+
 	}
 
 	function fart(){
@@ -272,6 +302,7 @@
 	}
 
 	function fart1(){
+		rc1 = false ;
 		df1 = df1 - 5 ;
 
 		if( _dsa == true ) return ;
@@ -279,6 +310,7 @@
 	}
 
 	function fart2(){
+		rc2 = false ;
 		df2 = df2 - 5 ;
 
 		if( _dsa == true ) return ;
