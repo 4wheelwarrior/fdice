@@ -130,17 +130,16 @@
 	// frame counts
 	// indices are roll types (d-N-f.png)
 	// N = 0, 1, 2, 3 ...  f = 1, 2, 3 ...
-	var _DT = [ 22, 26, 21, 11, 24 ] ;
-
+	var _DT = [ 22, 26, 21, 11, 24, 25, 25 ] ;
 	// Center Line X offsets
 	// ( d1 and d2 are offset - and + from center line
     //   to prevent excessive dice overlap )
-	var _DC = [ -50, -75, -25, 50, -25 ] ;
+	var _DC = [ -50, -75, -25, 50, -25, -50, -75 ] ;
 
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
 
-	var _dsa = true ; // DiSAble audio bit
+	var _dsa = false ; // DiSAble audio bit
 
 	function main(){
 		initDiceFrames() ;
