@@ -130,16 +130,19 @@
 	// frame counts
 	// indices are roll types (d-N-f.png)
 	// N = 0, 1, 2, 3 ...  f = 1, 2, 3 ...
-	var _DT = [ 22, 26, 21, 11, 24, 25, 25 ] ;
+	var _DT = [ 22, 26, 21, 11, 24, 25, 25, 12, 15, 21 ] ;
 	// Center Line X offsets
 	// ( d1 and d2 are offset - and + from center line
     //   to prevent excessive dice overlap )
-	var _DC = [ -50, -75, -25, 50, -25, -50, -25 ] ;
+	var _DC = [ -50, -75, -25, 50, -25, -50, -25, 0, 0, 0 ] ;
 
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
 
 	var _dsa = true ; // DiSAble audio bit
+
+	var _FIM = [] ; // (F)rame (IM)ages
+	var _VIM = [] ; // (V)alue (IM)ages
 
 	function main(){
 		initDiceFrames() ;
@@ -179,17 +182,17 @@
 		// OUTER LOOP: ROLL ANIM TYPE (0 - N)
 		for( var i = 0; i < _DT.length; i++ ){
 			// INNER LOOP: FRAME COUNT (REFC'D FROM _DT ARRAY)
+			_FIM[i] = [] ;
+			_FIM[i][0] = new Image() ;
 			for( var j = 1; j <= _DT[i]; j++ ){
-				img = document.createElement('img') ;
-
+				img = new Image() ;
 				img.src = 'd-' + i + '-' + j + '.png' ;
-				img.id =  'd-' + i + '-' + j ;
 
-				// console.log('generated img id: ' + img.id) ;
-
-				getID('dice-frames').appendChild( img ) ;
+				_FIM[i][j] = img ;
 			}
 		}
+
+		console.log( _FIM ) ;
 	}
 
 	function initValuFrames(){
@@ -198,15 +201,14 @@
 		// OUTER LOOP: ROLL ANIM TYPE (0 - N)
 		for( var i = 0; i < _DT.length; i++ ){
 			// INNER LOOP: DICE VALUE
+			_VIM[i] = [] ;
+			_VIM[i][0] = new Image() ;
 			for( var j = 1; j < 7; j++ ){
 				img = document.createElement('img') ;
 
 				img.src = 'v-' + i + '-' + j + '.png' ;
-				img.id =  'v-' + i + '-' + j ;
-
-				// console.log('generated img id: ' + img.id) ;
-
-				getID('dice-frames').appendChild( img ) ;
+				
+				_VIM[i][j] = img ;
 			}
 		}
 	}
@@ -251,6 +253,9 @@
 		var x1 = _DC[ dt1 ] + 100 ;
 		var x2 = _DC[ dt2 ] - 100 ;
 
+		var istr1 = '' ;
+		var istr2 = '' ;
+
 		df1++ ;
 		df2++ ;
 
@@ -274,20 +279,12 @@
 
 
 		// DRAW DICE 1 ( ANIM OR VALUE FRAME, IF FINISHED )
-		if( rc1 == false ) _CTX.drawImage( getID( 'd-' + dt1 + '-' + df1 ), x1, 0, 480, 800 ) ;
-		else _CTX.drawImage( getID( 'v-' + dt1 + '-' + r1 ), x1, 0, 480, 800 ) ;
+		if( rc1 == false ) _CTX.drawImage( _FIM[dt1][df1], x1, 0, 480, 800 ) ;
+		else _CTX.drawImage( _VIM[dt1][r1], x1, 0, 480, 800 ) ;
 
 		// DRAW DICE 2 ( ANIM OR VALUE FRAME, IF FINISHED )
-		if( rc2 == false ) _CTX.drawImage( getID( 'd-' + dt2 + '-' + df2 ), x2, 0, 480, 800 ) ;
-		else _CTX.drawImage( getID( 'v-' + dt2 + '-' + r2 ), x2, 0, 480, 800 ) ;
-	}
-
-	function drawDiceFrame(){
-
-	}
-
-	function drawValuFrame(){
-
+		if( rc2 == false ) _CTX.drawImage( _FIM[dt2][df2], x2, 0, 480, 800 ) ;
+		else _CTX.drawImage( _VIM[dt2][r2], x2, 0, 480, 800 ) ;
 	}
 
 	function fart(){
