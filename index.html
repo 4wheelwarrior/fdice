@@ -137,9 +137,8 @@
 		_IUD = window.setInterval( update, 60 ) ;
 		_AFS = document.getElementById( 'afs' ) ;
 
-		getID('dice').addEventListener( 'touchmove', roll, false ) ;
+		getID('dice').addEventListener( 'touchend', roll, false ) ;
 
-		_ulok = false ;
 		roll() ;
 	}
 
@@ -199,6 +198,8 @@
 	}
 
 	function roll(){
+		_ulok = false ;
+		
 		rc1 = false ;
 		rc2 = false ;
 		// dt1 = _DT[ randomInt( 0, 3 ) ] ;
