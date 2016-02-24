@@ -199,15 +199,9 @@
 
 	function roll(){
 		_ulok = false ;
-		
+
 		rc1 = false ;
 		rc2 = false ;
-		// dt1 = _DT[ randomInt( 0, 3 ) ] ;
-		// dt2 = dt1 ;
-
-		// while( dt2 == dt1 ){
-		// 	dt2 = _DT[ randomInt( 0, 3 ) ] ;
-		// }
 
 
 		dt1 = randomInt( 0, ( _DT.length - 1 ) ) ;
@@ -220,12 +214,6 @@
 
 		r1 = randomInt( 1, 6 ) ;
 		r2 = randomInt( 1, 6 ) ;
-
-		getID( 'r1' ).innerHTML = r1 ;
-		getID( 'r2' ).innerHTML = r2 ;
-
-		getID( 'dt1' ).innerHTML = dt1 ;
-		getID( 'dt2' ).innerHTML = dt2 ;
 
 		df1 = 1 ;
 		df2 = 1 ;
