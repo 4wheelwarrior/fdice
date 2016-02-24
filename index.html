@@ -75,7 +75,7 @@
 		width: 480px ;
 		height: 800px ;
 
-		background: url('bg2.gif') ;
+		background: url('bg.gif') ;
 	}
 
 	#fart{
@@ -154,11 +154,11 @@
 	// frame counts
 	// indices are roll types (d-N-f.png)
 	// N = 0, 1, 2, 3 ...  f = 1, 2, 3 ...
-	var _DT = [ 22, 26, 21, 11, 24, 25, 25, 12 ] ; //, 15, 21 ] ;
+	var _DT = [ 22, 26, 21, 11, 24, 25, 25, 12, 15 ] ;
 	// Center Line X offsets
 	// ( d1 and d2 are offset - and + from center line
     //   to prevent excessive dice overlap )
-	var _DC = [ -50, -75, -25, 50, -25, -75, 50, 0 ] ; //, 0, 0 ] ;
+	var _DC = [ -50, -75, -25, 50, -25, -75, 50, 0, 50 ] ;
 
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
@@ -169,6 +169,8 @@
 	var _VIM = [] ; // (V)alue (IM)ages
 
 	var _ulok = true ;
+
+	var _rc = 0 ;
 
 	function main(){
 		initDiceFrames() ;
@@ -183,10 +185,14 @@
 		_IUD = window.setInterval( update, 60 ) ;
 		_AFS = document.getElementById( 'afs' ) ;
 
-		getID('dice').addEventListener( 'click', roll, false ) ;
+		getID('dice').addEventListener( 'mouseup', roll, false ) ;
 
 		_ulok = false ;
 		roll() ;
+	}
+
+	function tort(){
+		window.setInterval( roll, 3000 ) ;
 	}
 
 	function initRollAudio(){
@@ -220,8 +226,6 @@
 				_FIM[i][j] = img ;
 			}
 		}
-
-		console.log( _FIM ) ;
 	}
 
 	function initValuFrames(){
@@ -292,9 +296,6 @@
 
 		df1++ ;
 		df2++ ;
-
-		// console.log('df1 = ' + df1 ) ;
-		// console.log('df2 = ' + df2 ) ;
 
 
 		// DICE 1: IF END FRAME REACHED, CAP & SET FLAG
