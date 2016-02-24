@@ -13,7 +13,7 @@
 	#ver{
 		position: absolute ;
 		z-index: 1000 ;
-		background: black ;
+		background: #333 ;
 		width: 80px ;
 		height: 30px ;
 		padding: 4px ;
@@ -38,6 +38,30 @@
 		left: 200px ;
 		z-index: 1000 ;
 		background: black ;
+		width: 80px ;
+		height: 30px ;
+		padding: 4px ;
+		color: white ;
+	}
+
+	#dt1{
+		position: absolute ;
+
+		left: 300px ;
+		z-index: 1000 ;
+		background: #333 ;
+		width: 80px ;
+		height: 30px ;
+		padding: 4px ;
+		color: white ;
+	}
+
+	#dt2{
+		position: absolute ;
+
+		left: 400px ;
+		z-index: 1000 ;
+		background: #333 ;
 		width: 80px ;
 		height: 30px ;
 		padding: 4px ;
@@ -130,11 +154,11 @@
 	// frame counts
 	// indices are roll types (d-N-f.png)
 	// N = 0, 1, 2, 3 ...  f = 1, 2, 3 ...
-	var _DT = [ 22, 26, 21, 11, 24, 25, 25, 12, 15, 21 ] ;
+	var _DT = [ 22, 26, 21, 11, 24, 25, 25, 12 ] ; //, 15, 21 ] ;
 	// Center Line X offsets
 	// ( d1 and d2 are offset - and + from center line
     //   to prevent excessive dice overlap )
-	var _DC = [ -50, -75, -25, 50, -25, -50, -25, 0, 0, 0 ] ;
+	var _DC = [ -50, -75, -25, 50, -25, -75, 50, 0 ] ; //, 0, 0 ] ;
 
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
@@ -143,6 +167,8 @@
 
 	var _FIM = [] ; // (F)rame (IM)ages
 	var _VIM = [] ; // (V)alue (IM)ages
+
+	var _ulok = true ;
 
 	function main(){
 		initDiceFrames() ;
@@ -158,6 +184,9 @@
 		_AFS = document.getElementById( 'afs' ) ;
 
 		getID('dice').addEventListener( 'click', roll, false ) ;
+
+		_ulok = false ;
+		roll() ;
 	}
 
 	function initRollAudio(){
@@ -238,6 +267,9 @@
 		getID( 'r1' ).innerHTML = r1 ;
 		getID( 'r2' ).innerHTML = r2 ;
 
+		getID( 'dt1' ).innerHTML = dt1 ;
+		getID( 'dt2' ).innerHTML = dt2 ;
+
 		df1 = 1 ;
 		df2 = 1 ;
 
@@ -247,6 +279,8 @@
 	}
 
 	function update(){
+		if( _ulok == true ) return ;
+
 		// Total X offsets for D1 and D2
 		// Computed from _DC values
 		// D1 goes RIGHT, D2 goes LEFT of center
@@ -339,6 +373,8 @@
 	<div id="ver">5</div>
 	<div id="r1">0</div>
 	<div id="r2">0</div>
+	<div id="dt1">0</div>
+	<div id="dt2">0</div>
 
 
 	<canvas id="dice" width="480" height="800"></canvas>
