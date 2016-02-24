@@ -18,9 +18,11 @@
 		height: 30px ;
 		padding: 4px ;
 		color: white ;
+
+		display: none ;
 	}
 
-	#r1{
+	#dt1{
 		position: absolute ;
 
 		left: 100px ;
@@ -32,36 +34,12 @@
 		color: white ;
 	}
 
-	#r2{
+	#dt2{
 		position: absolute ;
 
 		left: 200px ;
 		z-index: 1000 ;
 		background: black ;
-		width: 80px ;
-		height: 30px ;
-		padding: 4px ;
-		color: white ;
-	}
-
-	#dt1{
-		position: absolute ;
-
-		left: 300px ;
-		z-index: 1000 ;
-		background: #333 ;
-		width: 80px ;
-		height: 30px ;
-		padding: 4px ;
-		color: white ;
-	}
-
-	#dt2{
-		position: absolute ;
-
-		left: 400px ;
-		z-index: 1000 ;
-		background: #333 ;
 		width: 80px ;
 		height: 30px ;
 		padding: 4px ;
@@ -163,7 +141,7 @@
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
 
-	var _dsa = true ; // DiSAble audio bit
+	var _dsa = false ; // DiSAble audio bit
 
 	var _FIM = [] ; // (F)rame (IM)ages
 	var _VIM = [] ; // (V)alue (IM)ages
@@ -186,6 +164,7 @@
 		_AFS = document.getElementById( 'afs' ) ;
 
 		getID('dice').addEventListener( 'mouseup', roll, false ) ;
+		getID('dice').addEventListener( 'touchend', roll, false ) ;
 
 		_ulok = false ;
 		roll() ;
