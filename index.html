@@ -152,7 +152,7 @@
 		if( _dsa == true ) return ;
 
 		for( var i = 1; i < 7; i++ ){
-			_ARO[i] = new Media( '/android_asset/www/rol-' + i + '.wav' ) ;
+			PGLowLatencyAudio.preloadFX( 'aro-' + i, '/android_asset/www/rol-' + i + '.wav');
 		}
 	}
 
@@ -160,7 +160,7 @@
 		if( _dsa == true ) return ;
 
 		for( var i = 1; i < 7; i++ ){
-			_AFR[i] = new Media( '/android_asset/www/frt-' + i + '.wav' ) ;
+			PGLowLatencyAudio.preloadFX( 'afr-' + i, '/android_asset/www/frt-' + i + '.wav');
 		}
 	}
 
@@ -290,7 +290,7 @@
 		df1 = df1 - 5 ;
 
 		if( _dsa == true ) return ;
-		_AFR[ r1 ].play() ;
+		PGLowLatencyAudio.play( 'afr' + r1 );
 	}
 
 	function fart2(){
@@ -298,14 +298,14 @@
 		df2 = df2 - 5 ;
 
 		if( _dsa == true ) return ;
-		_AFR[ r2 ].play() ;
+		PGLowLatencyAudio.play( 'afr' + r2 );
 	}
 
 	function rsnd(){
 		var i = randomInt( 1, 6 ) ;
 
 		if( _dsa == true ) return ;
-		_ARO[i].play() ;
+		PGLowLatencyAudio.play( 'aro' + r1 );
 	}
 
 	function getID( id ){
