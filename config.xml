@@ -48,7 +48,7 @@
     <gap:plugin name="org.apache.cordova.geolocation" />
     <gap:plugin name="org.apache.cordova.globalization" />
     <gap:plugin name="org.apache.cordova.inappbrowser" /> -->
-    <gap:plugin name="org.apache.cordova.media" />
+    <plugin name="org.apache.cordova.media" spec="0.2.16" source="pgb" />
 <!--     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" /> -->
@@ -83,8 +83,18 @@
     <gap:splash src="res/screen/android/screen-hdpi-portrait.png"       gap:platform="android" gap:qualifier="port-hdpi" />
     <gap:splash src="res/screen/android/screen-xhdpi-portrait.png"      gap:platform="android" gap:qualifier="port-xhdpi" />
 
+    <!-- overrides entire AndroidManifest.xml, basically, to remove MEDIA permissions -->
     <gap:config-file platform="ios" parent="CFBundleShortVersionString">
-    <string>100</string>
+        <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:resizeable="true" android:smallScreens="true" android:xlargeScreens="true"/>
+        
+        <application android:debuggable="true" android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name">
+            <activity android:configChanges="locale|keyboard|keyboardHidden|orientation" android:label="@string/app_name" android:name=".FartingDice" android:screenOrientation="portrait" android:windowSoftInputMode="stateUnspecified|adjustUnspecified">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN"/>
+                    <category android:name="android.intent.category.LAUNCHER"/>
+                </intent-filter>
+            </activity>
+        </application>
     </gap:config-file>
 
     <!--
