@@ -121,7 +121,7 @@
 	var _VIM = [] ; // (V)alue (IM)ages
 
 	var _ulok = true ; // (U)pdate lock
-	var _rlok = true ; // (R)oll lock
+	var _rlok = false ; // (R)oll lock
 
 	var _rc = 0 ;
 
@@ -139,7 +139,6 @@
 		_AFS = document.getElementById( 'afs' ) ;
 
 		getID('dice').addEventListener( 'touchmove', roll, false ) ;
-		getID('dice').addEventListener( 'touchend', reset, false ) ;
 
 		roll() ;
 	}
@@ -202,7 +201,6 @@
 	function roll(){
 		if( _rlok == true ) return ;
 
-
 		_ulok = false ;
 		_rlok = true ;
 
@@ -228,10 +226,6 @@
 		rsnd() ;
 
 		window.setTimeout( fart, 2000 ) ;
-	}
-
-	function reset(){
-		_rlok = false ;
 	}
 
 	function update(){
@@ -299,6 +293,8 @@
 
 		if( _dsa == true ) return ;
 		PGLowLatencyAudio.play( 'afr' + r2 );
+
+		_rlok = false ;
 	}
 
 	function rsnd(){
