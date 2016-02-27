@@ -120,7 +120,8 @@
 	var _FIM = [] ; // (F)rame (IM)ages
 	var _VIM = [] ; // (V)alue (IM)ages
 
-	var _ulok = true ;
+	var _ulok = true ; // (U)pdate lock
+	var _rlok = true ; // (R)oll lock
 
 	var _rc = 0 ;
 
@@ -137,7 +138,8 @@
 		_IUD = window.setInterval( update, 60 ) ;
 		_AFS = document.getElementById( 'afs' ) ;
 
-		getID('dice').addEventListener( 'touchend', roll, false ) ;
+		getID('dice').addEventListener( 'touchmove', roll, false ) ;
+		getID('dice').addEventListener( 'touchend', reset, false ) ;
 
 		roll() ;
 	}
@@ -198,10 +200,15 @@
 	}
 
 	function roll(){
+		if( _rlok == true ) return ;
+
+
 		_ulok = false ;
+		_rlok = true ;
 
 		rc1 = false ;
 		rc2 = false ;
+
 
 
 		dt1 = randomInt( 0, ( _DT.length - 1 ) ) ;
@@ -221,6 +228,10 @@
 		rsnd() ;
 
 		window.setTimeout( fart, 2000 ) ;
+	}
+
+	function reset(){
+		_rlok = false ;
 	}
 
 	function update(){
