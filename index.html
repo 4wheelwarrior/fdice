@@ -296,10 +296,10 @@
 		rc2 = false ;
 		df2 = df2 - 5 ;
 
+		_rlok = false ;
+
 		if( _dsa == true ) return ;
 		PGLowLatencyAudio.play( 'afr-' + r2 );
-
-		_rlok = false ;
 	}
 
 	function rsnd(){
@@ -324,7 +324,7 @@
 </head>
 
 <body id="thebody" onload="main()">
-	<div id="ver">38</div>
+	<div id="ver">39</div>
 	<canvas id="dice" width="480" height="800"></canvas>
 	<div id="dice-frames"></div>
 </body>
