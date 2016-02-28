@@ -149,7 +149,7 @@
 
 		for( var i = 1; i < 7; i++ ){
 			// PGLowLatencyAudio.preloadFX( 'aro-' + i, '/android_asset/www/rol-' + i + '.wav');
-			PGLowLatencyAudio.preloadFX( 'aro-' + i, 'rol-' + i + '.wav', loadSuccess, loadFail );
+			PGLowLatencyAudio.preloadFX( 'aro-' + i, '/android_asset/www/rol-' + i + '.wav', loadSuccess, loadFail );
 		}
 	}
 
@@ -157,7 +157,7 @@
 		if( _dsa == true ) return ;
 
 		for( var i = 1; i < 7; i++ ){
-			PGLowLatencyAudio.preloadFX( 'afr-' + i, 'frt-' + i + '.wav');
+			PGLowLatencyAudio.preloadFX( 'afr-' + i, '/android_asset/www/frt-' + i + '.wav');
 		}
 	}
 
@@ -333,7 +333,7 @@
 </head>
 
 <body id="thebody" onload="main()">
-	<div id="ver">41</div>
+	<div id="ver">42</div>
 	<canvas id="dice" width="480" height="800"></canvas>
 	<div id="dice-frames"></div>
 </body>
