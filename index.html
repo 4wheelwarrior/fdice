@@ -115,7 +115,7 @@
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
 
-	var _dsa = false ; // DiSAble audio bit
+	var _dsa = true ; // DiSAble audio bit
 
 	var _FIM = [] ; // (F)rame (IM)ages
 	var _VIM = [] ; // (V)alue (IM)ages
@@ -141,10 +141,6 @@
 		getID('dice').addEventListener( 'touchmove', roll, false ) ;
 
 		roll() ;
-	}
-
-	function tort(){
-		window.setInterval( roll, 3000 ) ;
 	}
 
 	function initRollAudio(){
@@ -328,7 +324,7 @@
 </head>
 
 <body id="thebody" onload="main()">
-	<div id="ver">37</div>
+	<div id="ver">38</div>
 	<canvas id="dice" width="480" height="800"></canvas>
 	<div id="dice-frames"></div>
 </body>
