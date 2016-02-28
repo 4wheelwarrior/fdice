@@ -115,7 +115,7 @@
 	var _ARO = {}	// rolling sounds
 	var _AFR = {}   // farting sounds
 
-	var _dsa = true ; // DiSAble audio bit
+	var _dsa = false ; // DiSAble audio bit
 
 	var _FIM = [] ; // (F)rame (IM)ages
 	var _VIM = [] ; // (V)alue (IM)ages
@@ -289,7 +289,7 @@
 		df1 = df1 - 5 ;
 
 		if( _dsa == true ) return ;
-		PGLowLatencyAudio.play( 'afr-' + r1 );
+		PGLowLatencyAudio.play( 'afr-' + r1, playSuccess, playFail );
 	}
 
 	function fart2(){
@@ -299,14 +299,22 @@
 		_rlok = false ;
 
 		if( _dsa == true ) return ;
-		PGLowLatencyAudio.play( 'afr-' + r2 );
+		PGLowLatencyAudio.play( 'afr-' + r2, playSuccess, playFail );
 	}
 
 	function rsnd(){
 		var i = randomInt( 1, 6 ) ;
 
 		if( _dsa == true ) return ;
-		PGLowLatencyAudio.play( 'aro-' + r1 );
+		PGLowLatencyAudio.play( 'aro-' + r1, playSuccess, playFail );
+	}
+
+	function playSuccess(e){
+		alert('play success') ;
+	}
+
+	function playFail(e){
+		alert('play failed') ;
 	}
 
 	function getID( id ){
@@ -324,7 +332,7 @@
 </head>
 
 <body id="thebody" onload="main()">
-	<div id="ver">39</div>
+	<div id="ver">40</div>
 	<canvas id="dice" width="480" height="800"></canvas>
 	<div id="dice-frames"></div>
 </body>
