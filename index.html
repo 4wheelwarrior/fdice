@@ -82,7 +82,6 @@
 
 </style>
 <script src="phonegap.js"></script>
-<script src="PGLowLatencyAudio.js"></script>
 <script>
 	var dt1 = 0 ;
 	var dt2 = 0 ;
@@ -126,32 +125,6 @@
 
 	var _rc = 0 ;
 
-	var PGLowLatencyAudio = {
-		preloadFX: function ( id, assetPath, success, fail) {
-		    return PhoneGap.exec(success, fail, "PGLowLatencyAudio", "preloadFX", [id, assetPath]);
-		},
-		 
-		preloadAudio: function ( id, assetPath, voices, success, fail) {
-		    return PhoneGap.exec(success, fail, "PGLowLatencyAudio", "preloadAudio", [id, assetPath, voices]);
-		},
-		 
-		play: function (id, success, fail) {
-		    return PhoneGap.exec(success, fail, "PGLowLatencyAudio", "play", [id]);
-		},
-		 
-		stop: function (id, success, fail) {
-		    return PhoneGap.exec(success, fail, "PGLowLatencyAudio", "stop", [id]);
-		},
-		 
-		loop: function (id, success, fail) {
-		    return PhoneGap.exec(success, fail, "PGLowLatencyAudio", "loop", [id]);
-		},
-		 
-		unload: function (id, success, fail) {
-		    return PhoneGap.exec(success, fail, "PGLowLatencyAudio", "unload", [id]);
-		}
-	};
-
 	function main(){
 		initDiceFrames() ;
 		initValuFrames() ;
@@ -174,8 +147,7 @@
 		if( _dsa == true ) return ;
 
 		for( var i = 1; i < 7; i++ ){
-			// PGLowLatencyAudio.preloadFX( 'aro-' + i, '/android_asset/www/rol-' + i + '.wav');
-			PGLowLatencyAudio.preloadFX( 'aro-' + i, '/android_asset/www/rol-' + i + '.wav', loadSuccess, loadFail );
+			_ARO[i] = new Media( '/android_asset/www/rol-' + i + '.wav' ) ;
 		}
 	}
 
@@ -183,16 +155,8 @@
 		if( _dsa == true ) return ;
 
 		for( var i = 1; i < 7; i++ ){
-			PGLowLatencyAudio.preloadFX( 'afr-' + i, '/android_asset/www/frt-' + i + '.wav');
+			_AFR[i] = new Media( '/android_asset/www/frt-' + i + '.wav' ) ;
 		}
-	}
-
-	function loadSuccess(e){
-		alert('load successful') ;
-	}
-
-	function loadFail(e){
-		alert('load fail') ;
 	}
 
 	function initDiceFrames(){
@@ -316,7 +280,7 @@
 		df1 = df1 - 5 ;
 
 		if( _dsa == true ) return ;
-		PGLowLatencyAudio.play( 'afr-' + r1, playSuccess, playFail );
+		_AFR[ r1 ].play() ;
 	}
 
 	function fart2(){
@@ -326,22 +290,14 @@
 		_rlok = false ;
 
 		if( _dsa == true ) return ;
-		PGLowLatencyAudio.play( 'afr-' + r2, playSuccess, playFail );
+		_AFR[ r2 ].play() ;
 	}
 
 	function rsnd(){
 		var i = randomInt( 1, 6 ) ;
 
 		if( _dsa == true ) return ;
-		PGLowLatencyAudio.play( 'aro-' + r1, playSuccess, playFail );
-	}
-
-	function playSuccess(e){
-		alert('play success') ;
-	}
-
-	function playFail(e){
-		alert('play failed') ;
+		_ARO[i].play() ;
 	}
 
 	function getID( id ){
