@@ -107,6 +107,7 @@
 	// indices are roll types (d-N-f.png)
 	// N = 0, 1, 2, 3 ...  f = 1, 2, 3 ...
 	var _DT = [ 22, 26, 21, 11, 24, 25, 25, 12, 15 ] ;
+
 	// Center Line X offsets
 	// ( d1 and d2 are offset - and + from center line
     //   to prevent excessive dice overlap )
@@ -138,9 +139,8 @@
 		_IUD = window.setInterval( update, 60 ) ;
 		_AFS = document.getElementById( 'afs' ) ;
 
-		getID('dice').addEventListener( 'touchmove', roll, false ) ;
-
-		roll() ;
+		if( _dsa == false ) getID('dice').addEventListener( 'touchmove', roll, false )
+		else getID('dice').addEventListener( 'click', roll, false )
 	}
 
 	function initRollAudio(){
