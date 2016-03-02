@@ -182,8 +182,6 @@
 		// ( only need to compute 1 axis )
 		var s = scw / nw ;
 
-		s = 1.6 ; // testing transform-origin ...
-
 		// getID('wrapper').style.transformOrigin = '0px 0px' ;
 		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
 	}
@@ -393,7 +391,6 @@
 
 <body id="thebody" onload="main()">
 	<div id="wrapper">
-		<div id="dbg">DEBUG</div>
 		<canvas id="dice" width="480" height="800"></canvas>
 		<div id="dice-frames"></div>
 	</div>
