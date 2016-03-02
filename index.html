@@ -28,6 +28,8 @@
 	#wrapper{
 		width: 480px ;
 		height: 800px ;
+
+		transform-origin: 0px 0px ;
 	}
 
 	#dice{
@@ -166,6 +168,26 @@
 	}
 
 	function setScale(){
+		// Nominal height/width on which this
+		// whole fucking app is based
+		var nw = 480 ;
+		var nh = 800 ;
+
+		// Pixel Ratio adjusted bullshit
+		var scw = screen.width ;
+		var sch = screen.height ;
+
+		// Scale Factor
+		// ( only need to compute 1 axis )
+		var s = scw / nw ;
+
+		s = 1.6 ; // testing transform-origin ...
+
+		// getID('wrapper').style.transformOrigin = '0px 0px' ;
+		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
+	}
+
+	function setScaleFUCK(){
 		// Nominal height/width on which this
 		// whole fucking app is based
 		var nw = 480 ;
