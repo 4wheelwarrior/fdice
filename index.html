@@ -141,6 +141,7 @@
 	function main(){
 		setScale() ;
 
+
 		initDiceFrames() ;
 		initValuFrames() ;
 
@@ -155,6 +156,9 @@
 
 		if( _dsa == false ) getID('dice').addEventListener( 'touchmove', roll, false )
 		else getID('dice').addEventListener( 'click', roll, false )
+
+		// Just to let em know its working
+		roll() ;
 	}
 
 	function setScale(){
@@ -176,6 +180,8 @@
 		// Scale Factor
 		// ( only need to compute 1 axis )
 		var s = pxw / nw ;
+
+		// alert( 'dpr/scw/sch/s: ' + dpr + ', ' + scw + ', ' + sch + ', ' + s ) ;
 
 		getID('wrapper').style.transformOrigin = '0 0' ;
 		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
