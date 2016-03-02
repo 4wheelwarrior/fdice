@@ -30,6 +30,11 @@
 		height: 800px ;
 	}
 
+	#dbg{
+		background: black ;
+		color: white ;
+	}
+
 	#dice{
 		display: block ;
 
@@ -181,7 +186,7 @@
 		// ( only need to compute 1 axis )
 		var s = pxw / nw ;
 
-		// alert( 'dpr/scw/sch/s: ' + dpr + ', ' + scw + ', ' + sch + ', ' + s ) ;
+		getID('dbg').innerHTML = 'dpr/scw/sch/s: ' + dpr + ', ' + scw + ', ' + sch + ', ' + s ;
 
 		getID('wrapper').style.transformOrigin = '0 0' ;
 		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
@@ -366,6 +371,7 @@
 
 <body id="thebody" onload="main()">
 	<div id="wrapper">
+		<div id="dbg">DEBUG</div>
 		<canvas id="dice" width="480" height="800"></canvas>
 		<div id="dice-frames"></div>
 	</div>
