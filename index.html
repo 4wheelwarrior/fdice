@@ -182,7 +182,7 @@
 		getID('curtain').style.display = 'none' ;
 
 		// Just to let em know its working
-		roll() ;
+		window.setTimeout( roll, 800 ) ;
 	}
 
 	function setScale(){
@@ -201,6 +201,9 @@
 
 		// getID('wrapper').style.transformOrigin = '0px 0px' ;
 		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
+
+		// AND ... make the dice a bit bigger
+		setTransform( getID('dice'), 'scale( 1.14, 1.14 )' ) ;
 	}
 
 	function initRollAudio(){
