@@ -7,7 +7,7 @@
 	* { margin:0; padding:0; } /* to remove the top and left whitespace */
 
 	body{
-		background: #333 ;
+		background: url('sub-bg.gif') #062004 ;
 		padding: 0 ;
 		margin: 0 ;
 
@@ -23,6 +23,18 @@
 		height: 30px ;
 		padding: 4px ;
 		color: white ;
+	}
+
+	#curtain{
+		position: absolute ;
+		z-index: 10000 ;
+
+		width: 2000px ;
+		height: 2000px ;
+
+		background: black ;
+
+		display: block ;
 	}
 
 	#wrapper{
@@ -145,9 +157,12 @@
 
 	var _rc = 0 ;
 
+	function waitDeviceReady(){
+		document.addEventListener( 'deviceready', main, false ) ;
+	}
+
 	function main(){
 		setScale() ;
-
 
 		initDiceFrames() ;
 		initValuFrames() ;
@@ -163,6 +178,8 @@
 
 		if( _dsa == false ) getID('dice').addEventListener( 'touchmove', roll, false )
 		else getID('dice').addEventListener( 'click', roll, false )
+
+		getID('curtain').style.display = 'none' ;
 
 		// Just to let em know its working
 		roll() ;
@@ -183,32 +200,6 @@
 		var s = scw / nw ;
 
 		// getID('wrapper').style.transformOrigin = '0px 0px' ;
-		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
-	}
-
-	function setScaleFUCK(){
-		// Nominal height/width on which this
-		// whole fucking app is based
-		var nw = 480 ;
-		var nh = 800 ;
-
-		var dpr = window.devicePixelRatio ;
-
-		// Pixel Ratio adjusted bullshit
-		var scw = screen.width ;
-		var sch = screen.height ;
-
-		// Actual Pixels on the fucking device
-		var pxw = scw * dpr ;
-		var pxh = sch * dpr ;
-
-		// Scale Factor
-		// ( only need to compute 1 axis )
-		var s = pxw / nw ;
-
-		getID('dbg').innerHTML = 'dpr/scw/sch/s: ' + dpr + ', ' + scw + ', ' + sch + ', ' + s ;
-
-		getID('wrapper').style.transformOrigin = '0 0' ;
 		setTransform( getID('wrapper'), 'scale( '+ s +', ' + s + ' )' ) ;
 	}
 
@@ -389,7 +380,8 @@
 </script>
 </head>
 
-<body id="thebody" onload="main()">
+<body id="thebody" onload="waitDeviceReady()">
+	<div id="curtain"></div>
 	<div id="wrapper">
 		<canvas id="dice" width="480" height="800"></canvas>
 		<div id="dice-frames"></div>
