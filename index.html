@@ -162,9 +162,15 @@
 
 	var _rc = 0 ;
 
-	function waitDeviceReady(){
+	function onDeviceReady(){
 		document.addEventListener( 'deviceready', main, false ) ;
+		document.addEventListener( 'resume', onResume, false ) ;
+		document.addEventListener( 'pause', onPause, false ) ;
 	}
+
+	function onResume(){ main() ; }
+
+	function onPause(){ _ulok = true ; }
 
 	function main(){
 		setScale() ;
@@ -388,7 +394,7 @@
 </script>
 </head>
 
-<body id="thebody" onload="waitDeviceReady()">
+<body id="thebody" onload="onDeviceReady()">
 	<div id="curtain"></div>
 	<div id="wrapper">
 		<canvas id="dice" width="480" height="800"></canvas>
