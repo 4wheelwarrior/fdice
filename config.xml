@@ -4,15 +4,15 @@
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         xmlns:gap       = "http://phonegap.com/ns/1.0"
         xmlns:android   = "http://schemas.android.com/apk/res/android"
-        id              = "com.wildman-industries.fda"
+        id              = "com.wildman_industries.fda"
         version         = "1.0.6">
 
 
     <name>Farting Dice</name>
 
-    <description>Farting Dice</description>
+    <description>The Farting Dice Application</description>
 
-    <author href="http://phonegap.com" email="support@phonegap.com">Colin Palmer</author>
+    <author href="http://wildman-industries.com" email="postmaster@wildman-industries.com">Colin Palmer</author>
 
     <!--
         If you do not want any permissions to be added to your app, add the
